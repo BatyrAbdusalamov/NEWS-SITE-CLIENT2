@@ -17,7 +17,7 @@ export const routeConfig:RouteConfig[] = [
         element: MainPage,
     },
     {
-        path: LINK_APP.AUTH,
+        path: LINK_APP.AUTH+"/*",
         element: AuthPage,
     }
 ]

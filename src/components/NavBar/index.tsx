@@ -4,9 +4,10 @@ import css from "./NavBar.module.scss"
 import { Typography } from "../Typography"
 import { useNavigate } from "react-router-dom"
 import { LINK_APP } from "../../route/config"
+import { AuthNavigate } from "../../constants/navigate"
 export const NavBar = () => {
   const navigate = useNavigate()
-  const handleAuthPage = () => {navigate(LINK_APP.AUTH)}
+  const handleAuthPage = () => {navigate(LINK_APP.AUTH+AuthNavigate.SIGN_IN)}
   return(
     <div className={css.navbar}>
       <div>
