@@ -1,7 +1,7 @@
 import { Alert, Button, Grid2, TextField } from "@mui/material"
 import { signInUserRequest, UserDataRequest } from "../../../ducks/auth/user"
 import { Typography } from "../../../components/Typography"
-import { ChangeEvent, useRef, useState } from "react"
+import { ChangeEvent, FC, useRef, useState } from "react"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { AuthNavigate } from "../../../constants/navigate"
@@ -14,7 +14,7 @@ interface InputEvent extends HTMLInputElement {
 
 const initialRef: UserDataRequest = {login: "", password: ""}
 
-export const SignIn = ()=>{
+export const SignIn: FC = ()=>{
     const dispatch = useDispatch()
     const  navigate = useNavigate()
     const loginDataRef = useRef(initialRef)

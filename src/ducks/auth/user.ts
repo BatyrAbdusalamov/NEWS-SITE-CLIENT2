@@ -7,6 +7,13 @@ export interface UserDataRequest {
   password: string;
 }
 
+export interface UserCreateDataRequest {
+  login: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+}
+
 const initialState = {
   currentUser: {},
   loading: false,
@@ -19,6 +26,17 @@ export const signInUserRequest = createAsyncThunk(
   async (data: UserDataRequest, { rejectWithValue }) => {
     try {
       return await postman.post(`${TYPE_API.AUTH}${AUTH_API.IN}`,data);
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  }
+)
+
+export const signOutUserRequest = createAsyncThunk(
+  'signOutUserRequest',
+  async (data: UserCreateDataRequest, { rejectWithValue }) => {
+    try {
+      return await postman.post(`${TYPE_API.AUTH}${AUTH_API.OUT}`,data);
     } catch (e) {
       return rejectWithValue(e);
     }
@@ -41,6 +59,16 @@ export const userSlice = createSlice({
         state.loading = false;
       })
       .addCase(signInUserRequest.rejected, state => {
+        state.loading = false;
+      })
+      .addCase(signOutUserRequest.pending, state => {
+        state.loading = true;
+      })
+      .addCase(signOutUserRequest.fulfilled, (state,{ payload }) => {
+        state.currentUser = payload.data;
+        state.loading = false;
+      })
+      .addCase(signOutUserRequest.rejected, state => {
         state.loading = false;
       })
     }
