@@ -1,15 +1,6 @@
-FROM node:20-alpine
+FROM node:20-alpine as dev
 WORKDIR /app
-COPY src/ ./src
-COPY package.json ./
-COPY package-lock.json ./
-COPY tsconfig.json ./
-COPY tsconfig.node.json ./
-COPY tsconfig.app.json ./
-COPY vite.config.ts ./
-COPY index.html ./
-COPY .env ./
+COPY / ./
 RUN npm install
-RUN npm run build
 EXPOSE 5173
 CMD ["npm", "run", "preview"]
